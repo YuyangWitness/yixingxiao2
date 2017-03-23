@@ -4,16 +4,6 @@
 		<slide-search v-show="SearchShow">
 			<form id="searchBox">
 			<div id="selectWriting">
-				<div class="table-view" id="selectProject">
-					<span class="mui-icon mui-icon-arrowright mui-pull-right"></span>
-					<span class="state mui-pull-right"></span>
-					<label>保全项目</label>
-				</div>
-				<div class="table-view" id="selectState">
-					<span class="mui-icon mui-icon-arrowright mui-pull-right"></span>
-					<span class="state mui-pull-right">全部</span>
-					<label>保全状态</label>
-				</div>
 				<div class="table-view">
 					<input type="text" placeholder="请输入受理日期" />
 				</div>
@@ -23,7 +13,6 @@
 			</div>
 			</form>
 		</slide-search>
-		<div id="mask" v-show="SearchShow" @click="closeMask()"></div>
 	</div>
 </template>
 
@@ -43,15 +32,9 @@ export default{
 		'sort-list': sortList,
 		'slide-search': slidSearch
 	},
-	props: ['puserSearchShow'],
-	methods: {
-		closeMask(){
-			this.SearchShow = false;
-			this.$emit("closeSearch",1);
-		}
-	},
+	props: ["PslideShow"],
 	watch: {
-		puserSearchShow(newVal){
+		PslideShow(newVal){
 			this.SearchShow = newVal;
 		}
 	}
@@ -59,13 +42,5 @@ export default{
 </script>
 
 <style type="text/css" scoped>
-#mask{
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	top: 44px;
-	left: 0;
-	z-index: 11;
-    background-color: rgba(0,0,0,.3);
-}
+
 </style>

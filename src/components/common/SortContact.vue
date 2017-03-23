@@ -11,17 +11,17 @@
 			</li>
 		</ul>
 
-		<p id="word">
-			
+		<p id="word" class="wordShow" v-show="words">
 		</p>
 		<div id="nav">
-			<a v-for="(x,y) in navWord" @click="scrollWord($event)" :data-index='y'>{{x}}</a>
+			<a v-for="(x,y) in navWord" @hold="scrollWord($event)" @release="hideWord($event)" :data-index='y'>{{x}}</a>
 		</div>
 	</div>
 </template>
 
 <script type="text/javascript">
 import { sortPY } from './../../js/common/sortPin.js'
+import { setHtml } from './../../js/common/yixingxiao.js'
 export default{
 	props: {
 		username : {
@@ -33,7 +33,8 @@ export default{
 	data(){
 		return{
 			sortName : {},
-			navWord : []
+			navWord : [],
+			words: false
 		}
 		
 	},
@@ -61,11 +62,30 @@ export default{
 	},
 	methods: {
 		scrollWord(event){
-			console.log(event.srcElement.getAttribute('data-index'));
+			//console.log(event.srcElement.getAttribute('data-index'));
 			let scrollIndex = event.srcElement.getAttribute('data-index');
 			let firstBlood = this.$el.getElementsByClassName('firstBlood');
-			console.log(firstBlood[scrollIndex].offsetTop);
+			//console.log(firstBlood[scrollIndex].offsetTop);
+			//跳转滚动条
 			window.scrollTo(0, firstBlood[scrollIndex].offsetTop - 79);
+
+			let word = this.$el.getElementsByClassName("wordShow")[0];
+			//console.log(event.srcElement.textContent);
+			let Wtext = event.srcElement.textContent;
+			let scolltop = document.documentElement.scrollTop || document.body.scrollTop;
+			let height = (document.documentElement.clientHeight - word.offsetHeight) / 2;
+			let left = (document.documentElement.clientWidth - word.offsetWidth) / 2;
+			//填充字母到word
+			setHtml(word,event.srcElement)
+
+			//显示word并且在屏幕中央
+			this.words = true;
+			word.style.top= scolltop + height + 'px';
+			word.style.left= left + 'px';
+		},
+		hideWord(event){
+			let word = this.$el.getElementsByClassName("wordShow")[0];
+			this.words = false;
 		}
 	}
 }
@@ -108,6 +128,6 @@ export default{
 	font-size: large;
 	position: absolute;
 	color: white;
-	display: none;
+
 }
 </style>

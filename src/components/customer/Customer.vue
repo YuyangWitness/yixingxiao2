@@ -1,29 +1,29 @@
 <template>
 	<div id="customer">
 		<header id="head" class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left Aicon"></a>
+			<router-link to="/" class="mui-icon mui-icon-left-nav mui-pull-left Aicon"></router-link>
 			<h1 class="mui-title">客户</h1>
 
-			<a class="mui-icon iconfont icon-chaxun mui-pull-right Aicon" id="PUserSearch" v-show="puserSearch" @click="slideSearch()"></a>
-			<a class="mui-icon iconfont icon-chaxun mui-pull-right Aicon" id="UserSearch" v-show="userSearch"></a>
-			<a class="mui-icon mui-icon-plus mui-pull-right Aicon" style="margin-right: 2%;" id="addCustomer" v-show="addCustomer"></a>
+			<a class="mui-icon iconfont icon-chaxun mui-pull-right Aicon" id="PUserSearch" v-show="puserSearch" @click="slideSearch(1)"></a>
+			<a class="mui-icon iconfont icon-chaxun mui-pull-right Aicon" id="UserSearch" v-show="userSearch" @click="slideSearch(2)"></a>
+			<router-link to="/addcustomer" class="mui-icon mui-icon-plus mui-pull-right Aicon" style="margin-right: 2%;" id="addCustomer" v-show="addCustomer"></router-link>
 		</header>
 		<div id="SelectUser" class="Select">
 			<p>
-				<router-link :to="{ path:'puser', query: { puserSearchShow: puserSearchData } }"><div id="PUser" class="SelectActive active" @click="changeActive(1,$event)">潜在客户</div></router-link>
-				<router-link to="/user"><div id="User" class="SelectNoActive" @click="changeActive(2,$event)">正式客户</div></router-link>
+				<router-link to="/customer"><div id="PUser" class="SelectActive active" @click="changeActive(1,$event)">潜在客户</div></router-link>
+				<router-link to="/customer/user"><div id="User" class="SelectNoActive" @click="changeActive(2,$event)">正式客户</div></router-link>
 			</p>
 			
 		</div>
 		<div class="mui-content">
-			<router-view :puserSearchShow='puserSearchData' @closeSearch="close"></router-view>
+			<router-view :PslideShow="PShow" :UslideShow="UShow"></router-view>
 		</div>
+		<Mask-show v-show="maskShow" @closeMask="closeMask()"></Mask-show>
 	</div>
 </template>
 
 <script type="text/javascript">
-import '../../css/yixingxiao.css'
-import '../../css/Customer.css'
+import Mask from '../common/Mask.vue'
 import { containClass, addClass, removeClass } from '../../js/common/yixingxiao.js'
 
 export default{
@@ -32,7 +32,9 @@ export default{
 			puserSearch: true,
 			userSearch: false,
 			addCustomer: true,
-			puserSearchData: false
+			maskShow: false,
+			PShow: false,
+			UShow: false
 		}
 	},
 	methods: {
@@ -72,12 +74,27 @@ export default{
 
 			}
 		},
-		slideSearch(){
-			this.puserSearchData = true;
+		slideSearch(msg){
+
+			this.maskShow = !this.maskShow;
+
+			//根据判断点击的是那个按钮来弹出框
+			if(msg === 1){
+				this.PShow = !this.PShow;
+			}else if(msg === 2){
+				this.UShow = !this.UShow;
+			}
 		},
-		close(msg){
-			this.puserSearchData = false;
+		closeMask(msg){
+			//所有都隐藏
+			setTimeout(() => (this.maskShow = false),200);
+			
+			this.PShow = false;
+			this.UShow = false;
 		}
+	},
+	components: {
+		'Mask-show': Mask
 	}
 }
 

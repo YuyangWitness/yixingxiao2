@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="root">asdfasfd
+		<div id="root2">asdf</div>
+	</div>
+
+	<p class="root">asdfasfd
+		<label class="root2">asdf</label>
+	</p>
+</body>
+<script type="text/javascript">
+	window.onload = function(){
+		var root = document.querySelector("#root").querySelector("#root2");
+		root.style.background = 'red';
+		console.log(root);
+	}
+</script>
+</html>
