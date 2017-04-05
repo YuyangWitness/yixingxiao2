@@ -9,10 +9,10 @@
 			<router-link to="/addcustomer" class="mui-icon mui-icon-plus mui-pull-right Aicon" style="margin-right: 2%;" id="addCustomer" v-show="addCustomer"></router-link>
 		</header>
 		<div id="SelectUser" class="Select">
-			<p>
+			<div class="navDiv">
 				<router-link to="/customer"><div id="PUser" class="SelectActive active" @click="changeActive(1,$event)">潜在客户</div></router-link>
 				<router-link to="/customer/user"><div id="User" class="SelectNoActive" @click="changeActive(2,$event)">正式客户</div></router-link>
-			</p>
+			</div>
 			
 		</div>
 		<div class="mui-content">

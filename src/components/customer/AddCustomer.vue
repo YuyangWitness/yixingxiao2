@@ -6,11 +6,11 @@
 			<p class="mui-pull-right" style="margin-right: 10px;" id="confirm">确定</p>
 		</header>
 		<div class="Select" id="addCustomer">
-			<p>
-				<router-link to="/addcustomer"><div class="SelectActive active" @click="changeActive({e:$event,msg:1})">基本信息</div></router-link>
-				<router-link to="/addcustomer/business"><div class="" @click="changeActive({e:$event,msg:2})">业务意向</div></router-link>					
-				<router-link to="/addcustomer/contact"><div class="SelectNoActive" @click="changeActive({e:$event,msg:3})">联系人</div></router-link>
-			</p>
+			<div class="navDiv">
+				<div class="SelectActive active" @click="changeActive({e:$event,msg:1})">基本信息</div>
+				<div class="" @click="changeActive({e:$event,msg:2})">业务意向</div>				
+				<div class="SelectNoActive" @click="changeActive({e:$event,msg:3})">联系人</div>
+			</div>
 			<a class="mui-icon mui-icon-plus" id="addContact" v-show="addContactIcon"></a>
 		</div>
 		
@@ -49,10 +49,10 @@ export default{
 </script>
 
 <style type="text/css" scoped>
-.Select p{
+.Select .navDiv{
 	width: 70%;
 }
-.Select div {
+.Select .navDiv div {
 	width: 33%;
 }
 </style>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		window.onload = function(){
+
+		 function searchClassName(el,name){
+		 	let res = null;
+		 	if(el.parentNode){
+		 		if(el.parentNode.className !== name){
+		 			console.log(el.parentNode.className);
+		 			res = searchClassName(el.parentNode,name);
+		 		}else{
+		 			console.log(el.parentNode.className);
+		 			res = el.parentNode;
+		 		}
+		 	}
+
+		 	return res;
+		 	
+		 }
+
+		 let Div = document.getElementsByClassName("div3")[0];
+		 let res = searchClassName(Div,"div1");
+		 console.log(res);
+		}
+	</script>
+</head>
+<body>
+	<div class="div1">
+		<div class="div2">
+			<div class="div3"></div>
+		</div>
+	</div>
+</body>
+</html>

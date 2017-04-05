@@ -24,11 +24,11 @@
 	background: #efeff4;
 }
 
-.Select p{
+.Select .navDiv{
 	width: 50%;
 	margin: 0 auto;
 }
-.Select div {
+.Select .navDiv div {
 	text-align: center;
 	position: relative;
 	float: left;
@@ -48,7 +48,7 @@
 	
 }
 
-.Select .active{
+.Select .navDiv .active{
 	background: #6495ED;
 	color: white;
 }
